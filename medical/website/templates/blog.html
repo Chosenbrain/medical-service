@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Jazeera Blog{% endblock title %}
+
+	 {% block section %}
+      <br><p></p>
+	  <br><p></p>
+	   <br><p></p>
+	    <br><p></p>
+{% endblock section %}
+{% block meta %} the best medical-service website in Abuja {% endblock meta %}
+{% block content %}
+
+
+
+
+
+
+	  
+
+<section class="ftco-section bg-light" id="blog-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+            <h2 class="mb-4">Gets Every Single Updates Here</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+          </div>
+        </div>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 ftco-animate">
+           {% for blog in queryset %}
+            <h2 class="text-center">{{ blog.title }}</h2>
+            <div class="meta mb-3 text-center">
+           <div><h6><span><a href = "">written By {{ blog.author.user.username }}</span><a/></h6><a/>
+            <div class="meta ">{{ blog.timestamp|timesince }} ago</div>
+            </div>
+            </div>
+             <p class= "text-center"> <img src="{{ blog.thumbnail.url }}" alt="" class="img-fluid"></p>
+            <div><a href="#" class="meta-chat text-center"><span class="icon-chat"></span>{{ blog.comment_count }}</a></div>
+           <p class="text-center">{{ blog.overview }}</p>
+           
+               
+
+
+            <nav aria-label="pagination">
+                <ul class="pagination pagination-circle pg-blue">
+                 {% if queryset.has_previous %}
+                <li class="page-item"><a href= "?{{ page_request_var }}={{ queryset.previous_page_number }}"  class="page-link">Previous</a></li>
+                 {% endif %}
+               
+                    <li class="page-item active"><a href= "?{{ page_request_var }}={{ queryset.number }}" class="page-link">{{ queryset.number }}</a></li>
+                   </a>
+                  </li>
+               {% if queryset.has_next %}
+              <li class="page-item"><a  href= "?{{ page_request_var }}={{ queryset.next_page_number }}" class="page-link">Next</a></li>
+                {% endif %}
+           </ul>
+           </nav>
+
+
+
+            <div class="tag-widget post-tag-container mb-5 mt-5">
+              <div class="tagcloud">
+                <a href="#" class="tag-cloud-link">Life</a>
+                <a href="#" class="tag-cloud-link">Sport</a>
+                <a href="#" class="tag-cloud-link">Tech</a>
+                <a href="#" class="tag-cloud-link">Travel</a>
+              </div>
+            </div>
+
+              <div class="comment-form-wrap pt-5">
+                <h3 class="mb-5">Leave a comment</h3>
+                <form action="#" class="p-5 bg-light">
+                  <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" class="form-control" id="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" class="form-control" id="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+            
+              <h3 class="heading text-center">About Us</h3>
+                      <p>{{ blog.aboutblog }}</p>
+            </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+		
+{% endblock content  %}
+
+  
+
